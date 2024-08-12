@@ -1,7 +1,9 @@
 import { gql } from "@/__generated__"
+import { useLayoutOptions } from "@/components/layout/use-layout-options"
 import { EventItem } from "@/domains/event/event-item"
 import { useQuery } from "@apollo/client"
 import { createLazyFileRoute } from "@tanstack/react-router"
+import { useMemo } from "react"
 
 export const Route = createLazyFileRoute("/")({
   component: Index,
@@ -17,6 +19,8 @@ const GET_EVENTS = gql(`
 `)
 
 function Index() {
+  useLayoutOptions(useMemo(() => ({}), []))
+
   const { data } = useQuery(GET_EVENTS)
 
   return (
