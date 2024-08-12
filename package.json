@@ -1,0 +1,13 @@
+{
+  "name": "event-feedback-hub",
+  "version": "1.0.0",
+  "author": "Santiago Gonzalez",
+  "license": "MIT",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {},
+  "devDependencies": {
+    "turbo": "^2.0.12"
+  }
+}
