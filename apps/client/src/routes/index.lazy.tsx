@@ -1,10 +1,16 @@
 import { gql } from "@/__generated__"
+import {
+  EmptyState,
+  EmptyStateIcon,
+  EmptyStateTitle,
+} from "@/components/empty-state"
 import { useLayoutOptions } from "@/components/layout/use-layout-options"
 import { EventFormDialog } from "@/domains/event/event-form-dialog"
 import { EventItem } from "@/domains/event/event-item"
 import { cn } from "@/lib/utils"
 import { useQuery } from "@apollo/client"
 import { createLazyFileRoute } from "@tanstack/react-router"
+import { CalendarIcon } from "lucide-react"
 import { useMemo, useState } from "react"
 import { createHtmlPortalNode, OutPortal } from "react-reverse-portal"
 
@@ -26,7 +32,8 @@ function Index() {
     createHtmlPortalNode({ attributes: { class: cn("flex") } }),
   )
 
-  const { data } = useQuery(GET_EVENTS)
+  const { data, loading } = useQuery(GET_EVENTS)
+  const showEmptyState = !loading && !data?.events?.length
 
   const [open, setOpen] = useState(false)
 
@@ -47,6 +54,16 @@ function Index() {
             <EventItem key={event.id} event={event} />
           ))}
         </div>
+      )}
+
+      {showEmptyState && (
+        <EmptyState>
+          <EmptyStateIcon>
+            <CalendarIcon />
+          </EmptyStateIcon>
+
+          <EmptyStateTitle>There are no events to show</EmptyStateTitle>
+        </EmptyState>
       )}
 
       <EventFormDialog
