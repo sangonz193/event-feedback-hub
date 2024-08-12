@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Event {
+  id       Int        @id @default(autoincrement())
+  name     String
+  feedback Feedback[]
+}
+
+model Feedback {
+  id        Int      @id @default(autoincrement())
+  content   String
+  event     Event?   @relation(fields: [eventId], references: [id])
+  eventId   Int?
+  rating    Int
+  createdAt DateTime @default(now())
+}

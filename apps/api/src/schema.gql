@@ -1,0 +1,57 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Feedback {
+  id: Int!
+  content: String
+  event: Event
+  rating: Int
+  createdAt: Timestamp!
+}
+
+"""
+`Date` type as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
+"""
+scalar Timestamp
+
+type Event {
+  id: Int!
+  name: String
+  feedback: [Feedback!]
+  feedbacks: Feedback!
+}
+
+type FeedbacksPayload {
+  cursor: String
+  feedbacks: [Feedback!]!
+}
+
+type Query {
+  event(input: EventUniqueInput!): Event
+  events: [Event!]!
+  feedbacks(eventId: Int!, cursor: String, limit: Int, ratings: [Int!]): FeedbacksPayload!
+}
+
+input EventUniqueInput {
+  id: Int!
+}
+
+type Mutation {
+  createEvent(input: EventCreateInput!): Event!
+  createFeedback(input: FeedbackCreateInput!): Feedback!
+}
+
+input EventCreateInput {
+  name: String!
+}
+
+input FeedbackCreateInput {
+  rating: Float!
+  content: String!
+  eventId: Float!
+}
+
+type Subscription {
+  feedbackCreated(eventId: Int!): Feedback!
+}
