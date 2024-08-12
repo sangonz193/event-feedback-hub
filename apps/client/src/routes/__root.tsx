@@ -12,7 +12,7 @@ const Component = withWrappers(
     return (
       <div className="mx-auto flex w-full max-w-2xl flex-col px-4">
         <div className="flex min-h-16 flex-row items-center">
-          <AppBreadcrumb className="grow" />
+          <AppBreadcrumb className="grow basis-0" />
 
           {options?.headerRight}
         </div>

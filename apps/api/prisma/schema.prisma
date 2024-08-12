@@ -8,9 +8,10 @@ datasource db {
 }
 
 model Event {
-  id       Int        @id @default(autoincrement())
-  name     String
-  feedback Feedback[]
+  id        Int        @id @default(autoincrement())
+  name      String
+  feedback  Feedback[]
+  createdAt DateTime   @default(now())
 }
 
 model Feedback {

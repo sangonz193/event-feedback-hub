@@ -7,15 +7,11 @@ import {
   InputType,
   Field,
   Query,
-  ResolveField,
-  Root,
   Int,
 } from "@nestjs/graphql"
 import { Inject } from "@nestjs/common"
 import { PrismaService } from "../../prisma.service"
 import { Event } from "./event"
-import { Feedback as FeedbackRow } from "@prisma/client"
-import { Feedback } from "../feedback/feedback"
 
 @InputType()
 class EventCreateInput {
@@ -54,14 +50,9 @@ export class EventResolver {
 
   @Query((returns) => [Event])
   async events(@Context() ctx) {
-    return this.prismaService.event.findMany()
-  }
-
-  @ResolveField((returns) => Feedback)
-  async feedbacks(@Root() event: Event): Promise<FeedbackRow[]> {
-    return this.prismaService.feedback.findMany({
-      where: {
-        eventId: event.id,
+    return this.prismaService.event.findMany({
+      orderBy: {
+        createdAt: "desc",
       },
     })
   }

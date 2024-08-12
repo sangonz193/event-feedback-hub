@@ -23,15 +23,15 @@ export function AppBreadcrumb({ className }: { className?: string }) {
 
   return (
     <Breadcrumb className={className}>
-      <BreadcrumbList>
+      <BreadcrumbList className="flex-nowrap">
         {items.map((item, index) => {
           const isLast = index === items.length - 1
 
           let content: ReactNode
           if (isLast || !item.href) {
             content = (
-              <BreadcrumbItem>
-                <BreadcrumbPage className="text-xl">
+              <BreadcrumbItem className="shrink" title={item.name}>
+                <BreadcrumbPage className="max-w-full overflow-hidden truncate text-xl">
                   {item.name ?? " "}
                 </BreadcrumbPage>
               </BreadcrumbItem>

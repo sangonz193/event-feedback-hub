@@ -19,7 +19,6 @@ type Event {
   id: Int!
   name: String
   feedback: [Feedback!]
-  feedbacks: Feedback!
 }
 
 type FeedbacksPayload {

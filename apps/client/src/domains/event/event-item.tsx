@@ -9,9 +9,11 @@ export function EventItem(props: {
   const event = getFragmentData(EventItem.fragment, props.event)
 
   return (
-    <Button asChild variant="outline" className="min-h-16">
+    <Button asChild variant="outline" className="h-auto min-h-16 py-3">
       <Link key={event.id} to="/event/$id" params={{ id: event.id.toString() }}>
-        <span className="font-bold">{event.name}</span>
+        <span className="grow basis-0 whitespace-pre-wrap font-bold">
+          {event.name}
+        </span>
         <ChevronRightIcon className="ml-auto" />
       </Link>
     </Button>
